@@ -61,17 +61,13 @@ public class UserController {
                         .body("Invalid username or password");
             }
 
-            // Assuming your UserService has an authenticate method
             boolean isAuthenticated = userService.authenticate(loginRequest.getUsername(), loginRequest.getPassword());
 
             if (!isAuthenticated) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                         .body("Invalid username or password");
             }
-
-            // Here you would typically generate a JWT token or session ID
-            // For simplicity, we'll just return the user without sensitive data
-            user.setPassword(null); // Remove password from response
+            user.setPassword(null);
 
             return ResponseEntity.ok(user);
         } catch (Exception e) {
@@ -86,7 +82,7 @@ class LoginRequest {
     private String username;
     private String password;
 
-    // Getters and setters
+
     public String getUsername() {
         return username;
     }
